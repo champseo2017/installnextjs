@@ -1,12 +1,6 @@
-import React from 'react'
+import GridContainer from "../../components/Grid/GridContainer";
+const Dashboard = () => {
+  return <GridContainer>hello Dashboard</GridContainer>;
+};
 
-function Dashboard() {
-    return (
-        <div>
-            hello Dashboard
-        </div>
-    )
-}
-
-
-export default Dashboard
+export default Dashboard;
