@@ -2,7 +2,7 @@ import {
   blackColor,
   whiteColor,
   hexToRgb,
-} from "assets/jss/nextjs-material-dashboard.js";
+} from "../../nextjs-material-dashboard.js";
 
 const cardStyle = {
   card: {

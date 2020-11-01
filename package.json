@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node src/server/index.js",
+    "dev": "nodemon src/server/index.js",
     "build": "next build",
     "start": "next start"
   },
@@ -27,5 +27,8 @@
     "react-swipeable-views": "^0.13.9",
     "url-loader": "^4.1.1",
     "yarn-upgrade-all": "^0.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
