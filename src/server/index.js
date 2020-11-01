@@ -18,15 +18,18 @@ app.prepare().then(() => {
 
   /* 
   Learn Node js
-  Comparison between Promises and Async/Await
-  Function using promises:
+ So here is when Async/Await enter in action in order to get cleaner our function:
 
-  const myAsyncFunction = () => {
-    return aFunctionThatReturnsAPromise()
-           // doSomething is a sync function
-           .then(result => doSomething(result))
-           .catch(handleError)
+  async const myAsyncFunction = () => {
+    let result;
+    try {
+      result = await aFunctionThatReturnAPromise();
+    } catch (error) {
+      handleError(error);
+    }
   }
+  // doSomething is a sync function
+  return doSomething(result);
   */
    
 
