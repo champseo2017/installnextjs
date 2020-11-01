@@ -6,6 +6,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, poweredByHeader: false });
 const handle = app.getRequestHandler();
 const async = require("async");
+const http = require('http');
 
 app.prepare().then(() => {
   const server = express();
@@ -18,19 +19,35 @@ app.prepare().then(() => {
 
   /* 
   Learn Node js
- So here is when Async/Await enter in action in order to get cleaner our function:
+ Progression from Callbacks
+In the beginning there were callbacks, and callbacks were ok:
 
-  async const myAsyncFunction = () => {
-    let result;
-    try {
-      result = await aFunctionThatReturnAPromise();
-    } catch (error) {
-      handleError(error);
-    }
-  }
-  // doSomething is a sync function
-  return doSomething(result);
+
+const getTemperature = (callback) => {
+  http.get('www.temperature.com/current', (res) => {
+  callback(res.data.temperature)
+  })
+ }
+ const getAirPollution = (callback) => {
+  http.get('www.pollution.com/current', (res) => {
+  callback(res.data.pollution)
+  });
+ }
+
+ getTemperature(function(temp) {
+  getAirPollution(function(pollution) {
+  console.log(`the temp is ${temp} and the pollution is ${pollution}.`)
+  // The temp is 27 and the pollution is 0.5.
+  })
+ })
+ 
+
   */
+
+ 
+
+
+ 
    
 
 
