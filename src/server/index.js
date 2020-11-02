@@ -19,24 +19,31 @@ app.prepare().then(() => {
 
   /* 
   Learn Node js
- Synchronous callbacks.
+   Asynchronous callbacks
+   Some common things that are asynchronous in javascript environments that accept callbacks:
+   -Events
+   -setTimeout
+   -setInterval
+   -the fatch API
+   -Promises
 
- // a function that uses a callback named 'cb' as a parameter
-
-
- function getSyncMessage(cb) {
-    cb("Hello World!");
+   // a function that users a callback named 'cb' as a parameter
+  function getAsyncMessage(cb) {
+    setTimeout(() => {
+        cb("Hello World!")
+    }, 1000);
   }
 
   console.log("Before getSyncMessage call");
   // calling a function and sending in a callback function as an argument.
-  getSyncMessage(function(message){
+  getAsyncMessage(function(message){
     console.log(message);
-  })
-
+  });
   console.log("After getSyncMessage call");
 
   */
+
+  
 
 
   server.listen(port, (err) => {
