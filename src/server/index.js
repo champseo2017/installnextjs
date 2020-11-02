@@ -19,36 +19,24 @@ app.prepare().then(() => {
 
   /* 
   Learn Node js
- Progression from Callbacks
-In the beginning there were callbacks, and callbacks were ok:
+ Synchronous callbacks.
+
+ // a function that uses a callback named 'cb' as a parameter
 
 
-const getTemperature = (callback) => {
-  http.get('www.temperature.com/current', (res) => {
-  callback(res.data.temperature)
+ function getSyncMessage(cb) {
+    cb("Hello World!");
+  }
+
+  console.log("Before getSyncMessage call");
+  // calling a function and sending in a callback function as an argument.
+  getSyncMessage(function(message){
+    console.log(message);
   })
- }
- const getAirPollution = (callback) => {
-  http.get('www.pollution.com/current', (res) => {
-  callback(res.data.pollution)
-  });
- }
 
- getTemperature(function(temp) {
-  getAirPollution(function(pollution) {
-  console.log(`the temp is ${temp} and the pollution is ${pollution}.`)
-  // The temp is 27 and the pollution is 0.5.
-  })
- })
- 
+  console.log("After getSyncMessage call");
 
   */
-
- 
-
-
- 
-   
 
 
   server.listen(port, (err) => {
