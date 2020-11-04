@@ -1,4 +1,4 @@
-import { blackColor, hexToRgb } from "assets/jss/nextjs-material-dashboard.js";
+import { blackColor, hexToRgb } from "../nextjs-material-dashboard.js";
 
 const tooltipStyle = {
   tooltip: {
