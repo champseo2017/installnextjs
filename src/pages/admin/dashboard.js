@@ -25,11 +25,13 @@ import Danger from "../../components/Typography/Danger";
 import CustomTabs from "../../components/CustomTabs/CustomTabs";
 import Tasks from '../../components/Tasks/Tasks'
 import { bugs, website, server } from "../../variables/general.js";
+import { firestore } from "../../../database/firebase";
 
 const useStyles = makeStyles(styles);
 
 const Dashboard = () => {
   const classes = useStyles();
+  console.log(firestore)
   return (
     <Fragment>
       <GridContainer>
