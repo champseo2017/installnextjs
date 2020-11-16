@@ -9,6 +9,11 @@ const nextConfig = {
   generateBuildId: async () => {
     return process.env.BUILD_ID ? process.env.BUILD_ID : "1.0.0";
   },
+  images: {
+    deviceSizes: [320, 420, 768, 1024, 1200],
+    loader: "imgix",
+    path: "http://localhost:3000/",
+},
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.node = {

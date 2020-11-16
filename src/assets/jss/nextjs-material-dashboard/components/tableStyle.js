@@ -7,7 +7,7 @@ import {
   roseColor,
   grayColor,
   defaultFont,
-} from "assets/jss/nextjs-material-dashboard.js";
+} from "../../nextjs-material-dashboard.js";
 
 const tableStyle = (theme) => ({
   warningTableHeader: {

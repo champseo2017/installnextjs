@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,19 +19,30 @@ import GridItem from "../../components/Grid/GridItem";
 import Card from "../../components/Card/Card";
 import CardHeader from "../../components/Card/CardHeader";
 import CardIcon from "../../components/Card/CardIcon";
+import Table from "../../components/Table/Table";
+import CardBody from '../../components/Card/CardBody'
 import styles from "../../assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
 import CardFooter from "../../components/Card/CardFooter";
+import Admin from '../../components/layouts/Admin'
 import Danger from "../../components/Typography/Danger";
 import CustomTabs from "../../components/CustomTabs/CustomTabs";
-import Tasks from '../../components/Tasks/Tasks'
+import Tasks from "../../components/Tasks/Tasks";
 import { bugs, website, server } from "../../variables/general.js";
-import { firestore } from "../../../database/firebase";
+import { firestore } from "../../database/firebase";
 
 const useStyles = makeStyles(styles);
 
 const Dashboard = () => {
   const classes = useStyles();
-  console.log(firestore)
+
+  /* 
+   const TokenGenerator = require( 'token-generator' )({
+      salt: '0CBFAE',
+      timestampMap: 'koiujrfget', // 10 chars array for obfuscation proposes
+  });
+  
+  */
+
   return (
     <Fragment>
       <GridContainer>
@@ -152,9 +163,31 @@ const Dashboard = () => {
             ]}
           />
         </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card>
+            <CardHeader color="warning">
+              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+              <p className={classes.cardCategoryWhite}>
+                New employees on 15th September, 2016
+              </p>
+            </CardHeader>
+            <CardBody>
+              <Table
+                tableHeaderColor="warning"
+                tableHead={["ID", "Name", "Salary", "Country"]}
+                tableData={[
+                  ["1", "Dakota Rice", "$36,738", "Niger"],
+                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
+                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
+                  ["4", "Philip Chaney", "$38,735", "Korea, South"],
+                ]}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
       </GridContainer>
     </Fragment>
   );
 };
-
+Dashboard.layout = Admin;
 export default Dashboard;
