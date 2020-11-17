@@ -1,4 +1,4 @@
-import {useEffect, useState, createRef} from "react";
+import { useEffect, useState, createRef } from "react";
 import { useRouter } from "next/router";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
@@ -18,8 +18,10 @@ let ps;
 
 const useStyles = makeStyles(styles);
 
+// auth middleware Provider
+import { LoginProvider } from "../../middleware/LoginAdminContext";
+
 const Admin = ({ children, ...rest }) => {
- 
   // used for checking current route
   const router = useRouter();
   // styles
@@ -61,32 +63,34 @@ const Admin = ({ children, ...rest }) => {
     };
   }, [mainPanel]);
   return (
-    <div className={classes.wrapper}>
-      <Sidebar
-        routes={routes}
-        logoText={"Creative Tim"}
-        handleDrawerToggle={handleDrawerToggle}
-        open={mobileOpen}
-        color={color}
-        {...rest}
-      />
-      <div className={classes.mainPanel} ref={mainPanel}>
-        <Navbar
+    <LoginProvider>
+      <div className={classes.wrapper}>
+        <Sidebar
           routes={routes}
+          logoText={"Creative Tim"}
           handleDrawerToggle={handleDrawerToggle}
+          open={mobileOpen}
+          color={color}
           {...rest}
         />
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>{children}</div>
-          </div>
-        ) : (
-          <div className={classes.map}>{children}</div>
-        )}
-        {getRoute() ? <Footer /> : null}
+        <div className={classes.mainPanel} ref={mainPanel}>
+          <Navbar
+            routes={routes}
+            handleDrawerToggle={handleDrawerToggle}
+            {...rest}
+          />
+          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+          {getRoute() ? (
+            <div className={classes.content}>
+              <div className={classes.container}>{children}</div>
+            </div>
+          ) : (
+            <div className={classes.map}>{children}</div>
+          )}
+          {getRoute() ? <Footer /> : null}
+        </div>
       </div>
-    </div>
+    </LoginProvider>
   );
 };
 

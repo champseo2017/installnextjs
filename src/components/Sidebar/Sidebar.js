@@ -1,3 +1,4 @@
+import { useContext, Fragment } from "react";
 /*eslint-disable*/
 import classNames from "classnames";
 import PropTypes from "prop-types";
@@ -20,7 +21,11 @@ import styles from "../../assets/jss/nextjs-material-dashboard/components/sideba
 import Image from "next/image";
 const useStyles = makeStyles(styles);
 
+import { LoginAdminContext } from "../../middleware/LoginAdminContext";
+import empty from "is-empty";
+
 const Sidebar = (props) => {
+  const [token_Admin] = useContext(LoginAdminContext);
   // used for checking current route
   const router = useRouter();
   // creates styles for this component
@@ -105,50 +110,56 @@ const Sidebar = (props) => {
     </div>
   );
   return (
-    <div>
-      <Hidden mdUp implementation="css">
-        <Drawer
-          variant="temporary"
-          anchor={props.rtlActive ? "left" : "right"}
-          open={props.open}
-          classes={{
-            paper: classNames(classes.drawerPaper),
-          }}
-          onClose={props.handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          {brand}
-          <div className={classes.sidebarWrapper}>
-            <AdminNavbarLinks />
-            {links}
-          </div>
-          <div
-            className={classes.background}
-            style={{ backgroundImage: "url('/assets/img/sidebar-2.jpg')" }}
-          />
-        </Drawer>
-      </Hidden>
-      <Hidden smDown implementation="css">
-        <Drawer
-          anchor={props.rtlActive ? "right" : "left"}
-          variant="permanent"
-          open
-          classes={{
-            paper: classNames(classes.drawerPaper),
-          }}
-        >
-          {brand}
-          <div className={classes.sidebarWrapper}>{links}</div>
+    <Fragment>
+      {empty(token_Admin) ? (
+        <div />
+      ) : (
+        <div>
+          <Hidden mdUp implementation="css">
+            <Drawer
+              variant="temporary"
+              anchor={props.rtlActive ? "left" : "right"}
+              open={props.open}
+              classes={{
+                paper: classNames(classes.drawerPaper),
+              }}
+              onClose={props.handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              {brand}
+              <div className={classes.sidebarWrapper}>
+                <AdminNavbarLinks />
+                {links}
+              </div>
+              <div
+                className={classes.background}
+                style={{ backgroundImage: "url('/assets/img/sidebar-2.jpg')" }}
+              />
+            </Drawer>
+          </Hidden>
+          <Hidden smDown implementation="css">
+            <Drawer
+              anchor={props.rtlActive ? "right" : "left"}
+              variant="permanent"
+              open
+              classes={{
+                paper: classNames(classes.drawerPaper),
+              }}
+            >
+              {brand}
+              <div className={classes.sidebarWrapper}>{links}</div>
 
-          <div
-            className={classes.background}
-            style={{ backgroundImage: "url('/assets/img/sidebar-2.jpg')" }}
-          />
-        </Drawer>
-      </Hidden>
-    </div>
+              <div
+                className={classes.background}
+                style={{ backgroundImage: "url('/assets/img/sidebar-2.jpg')" }}
+              />
+            </Drawer>
+          </Hidden>
+        </div>
+      )}
+    </Fragment>
   );
 };
 

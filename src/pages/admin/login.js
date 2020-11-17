@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
 import LoginLayout from "../../components/layouts/Login";
 // material-ui style
 import Avatar from "@material-ui/core/Avatar";
@@ -34,6 +34,7 @@ const useStyles = makeStyles(styles);
 
 const Login = memo(() => {
   const classes = useStyles();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -101,4 +102,5 @@ const Login = memo(() => {
   );
 });
 Login.layout = LoginLayout;
+
 export default Login;

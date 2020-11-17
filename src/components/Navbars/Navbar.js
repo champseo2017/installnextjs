@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext, Fragment } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
@@ -18,8 +18,11 @@ import Button from "../CustomButtons/Button";
 import styles from "../../assets/jss/nextjs-material-dashboard/components/headerStyle.js";
 
 const useStyles = makeStyles(styles);
+import { LoginAdminContext } from "../../middleware/LoginAdminContext";
+import empty from "is-empty";
 
 const Header = (props) => {
+  const [token_Admin] = useContext(LoginAdminContext);
   // used for checking current route
   const router = useRouter();
   // create styles for this component
@@ -39,30 +42,36 @@ const Header = (props) => {
     [" " + classes[color]]: color,
   });
   return (
-    <AppBar className={classes.appBar + appBarClasses}>
-      <Toolbar className={classes.container}>
-        <div className={classes.flex}>
-          {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
-            {makeBrand()}
-          </Button>
-        </div>
-        <Hidden smDown implementation="css">
-          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
-        </Hidden>
-        <Hidden mdUp implementation="css">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
-          >
-            <Menu />
-          </IconButton>
-        </Hidden>
-      </Toolbar>
-    </AppBar>
+    <Fragment>
+      {empty(token_Admin) ? (
+        <div />
+      ) : (
+        <AppBar className={classes.appBar + appBarClasses}>
+          <Toolbar className={classes.container}>
+            <div className={classes.flex}>
+              {/* Here we create navbar brand, based on route name */}
+              <Button color="transparent" href="#" className={classes.title}>
+                {makeBrand()}
+              </Button>
+            </div>
+            <Hidden smDown implementation="css">
+              {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+            </Hidden>
+            <Hidden mdUp implementation="css">
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={props.handleDrawerToggle}
+              >
+                <Menu />
+              </IconButton>
+            </Hidden>
+          </Toolbar>
+        </AppBar>
+      )}
+    </Fragment>
   );
-}
+};
 
 Header.propTypes = {
   color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
@@ -71,4 +80,4 @@ Header.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default Header
+export default Header;
