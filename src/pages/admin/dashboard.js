@@ -47,7 +47,7 @@ const Dashboard = () => {
     let mount = true;
     if (mount) {
       if (empty(token_Admin)) {
-        Router.push("/admin/login");
+        //Router.push("/admin/dashboard");
       }else if(empty(token_Admin) === false){
         setLoad(true)
       }
@@ -58,9 +58,9 @@ const Dashboard = () => {
   }, [token_Admin]);
 
   const funcRenderHtml = () => {
-    if (empty(token_Admin)) {
+    if (empty(token_Admin) !== true) {
       return <div/>
-    } else if((empty(load) === false)) {
+    } else if((empty(load) === true)) {
       return (
         <Fragment>
           <GridContainer>

@@ -111,7 +111,7 @@ const Sidebar = (props) => {
   );
   return (
     <Fragment>
-      {empty(token_Admin) ? (
+      {empty(token_Admin) !== true ? (
         <div />
       ) : (
         <div>
